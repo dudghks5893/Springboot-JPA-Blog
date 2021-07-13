@@ -30,10 +30,10 @@ import lombok.NoArgsConstructor;
 public class User {
 	
 	@Id // Primary key (기본키)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)// 프로젝트에서 연결된 DB의 넘버링 전략을 따라간다.
+	@GeneratedValue(strategy = GenerationType.IDENTITY)// 프로젝트에서 연결된 DB의 넘버링 전략을 따라간다. unique로 중복을 허용 안 한다.
 	private int id; // 시퀀스, auto_increment
 	
-	@Column(nullable = false, length = 30)// null을 허용하지 않고, 문자 길이를 정한다.
+	@Column(nullable = false, length = 30, unique = true)// null을 허용하지 않고, 문자 길이를 정한다.
 	private String username; // 아이디
 	
 	@Column(nullable = false, length = 100) // 123456 => 해쉬(비밀번호 암호화)
