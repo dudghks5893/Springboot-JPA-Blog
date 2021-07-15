@@ -4,23 +4,27 @@
 <!-- 바디 시작-->
 <div class="container">
 
-	<form action="/action_page.php">
+	<form>
 		<div class="form-group">
-			<label for="username">Username</label> <input type="text" class="form-control" placeholder="Enter username" id="username">
+			<label for="username">Username</label> 
+			<input type="text" class="form-control" placeholder="Enter username" id="username">
 		</div>
-		
+
 		<div class="form-group">
-			<label for="password">Password</label> <input type="password" class="form-control" placeholder="Enter password" id="password">
+			<label for="password">Password</label> 
+			<input type="password" class="form-control" placeholder="Enter password" id="password">
 		</div>
-		
+
 		<div class="form-group">
-			<label for="email">Email</label> <input type="email" class="form-control" placeholder="Enter email" id="email">
+			<label for="email">Email</label> 
+			<input type="email" class="form-control" placeholder="Enter email" id="email">
 		</div>
-		
-		<button type="submit" class="btn btn-primary">회원가입</button>
 	</form>
+	<button id="btn-save" class="btn btn-primary">회원가입</button>
 
 </div>
+
+<script src="/blog/js/user.js"></script>
 <!-- 바디 끝 -->
 <!-- 푸터 -->
 <%@ include file="../layout/footer.jsp"%>
