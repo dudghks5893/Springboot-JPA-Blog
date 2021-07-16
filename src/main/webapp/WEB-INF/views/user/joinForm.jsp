@@ -24,7 +24,7 @@
 
 </div>
 
-<script src="/blog/js/user.js"></script>
+<script src="/js/user.js"></script>
 <!-- 바디 끝 -->
 <!-- 푸터 -->
 <%@ include file="../layout/footer.jsp"%>
