@@ -1,12 +1,14 @@
 let index = {
 	init:function(){
-		$("#btn-save").on("click", ()=>{ // function(){}를 사용안하고 , ()=>{}를 사용하는 이유는 this를 바인딩하기 위해서
+		$("#btn-save").on("click", ()=>{ 
 			this.save();
+		});
+		$("#btn-delete").on("click", ()=>{ 
+			this.deleteById();
 		});
 	},
 	
 	save:function(){
-		//alert('user의 save함수 호출됨');
 		let data = {
 			title:$("#title").val(),
 			content:$("#content").val(),
@@ -20,6 +22,22 @@ let index = {
 			dataType:"json"
 		}).done(function(resp){
 			alert("글쓰기가 완료되었습니다.");
+			location.href = "/";
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		}); 
+		
+	},
+	
+	deleteById:function(){
+		var id = $("#id").text(); // 벨류 값이 아닌 텍스트 값을 뽑아옴
+		
+		$.ajax({
+			type:"DELETE",
+			url:"/api/board/"+id,
+			dataType:"json"
+		}).done(function(resp){
+			alert("삭제가 완료되었습니다.");
 			location.href = "/";
 		}).fail(function(error){
 			alert(JSON.stringify(error));
