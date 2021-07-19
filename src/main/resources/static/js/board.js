@@ -6,8 +6,11 @@ let index = {
 		$("#btn-delete").on("click", ()=>{ 
 			this.deleteById();
 		});
+		$("#btn-update").on("click", ()=>{ 
+			this.update();
+		});
 	},
-	
+	// 글 등록
 	save:function(){
 		let data = {
 			title:$("#title").val(),
@@ -28,9 +31,9 @@ let index = {
 		}); 
 		
 	},
-	
+	// 글 삭제
 	deleteById:function(){
-		var id = $("#id").text(); // 벨류 값이 아닌 텍스트 값을 뽑아옴
+		let id = $("#id").text(); // 벨류 값이 아닌 텍스트 값을 뽑아옴
 		
 		$.ajax({
 			type:"DELETE",
@@ -38,6 +41,29 @@ let index = {
 			dataType:"json"
 		}).done(function(resp){
 			alert("삭제가 완료되었습니다.");
+			location.href = "/";
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		}); 
+		
+	},
+	// 글 수정
+	update:function(){
+		let id = $("#id").val();
+		
+		let data = {
+			title:$("#title").val(),
+			content:$("#content").val(),
+		};
+		
+		$.ajax({
+			type:"PUT",
+			url:"/api/board/"+id,
+			data:JSON.stringify(data), 
+			contentType:"application/json; charset=utf-8", 
+			dataType:"json"
+		}).done(function(resp){
+			alert("글수정이 완료되었습니다.");
 			location.href = "/";
 		}).fail(function(error){
 			alert(JSON.stringify(error));
