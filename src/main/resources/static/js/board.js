@@ -76,6 +76,7 @@ let index = {
 	// 댓글 등록
 	replySave:function(){
 		let data = {
+			userId:$("#userId").val(),
 			boardId:$("#boardId").val(),
 			content:$("#reply-content").val()
 		};
