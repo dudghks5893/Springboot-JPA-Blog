@@ -9,24 +9,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.blog.dto.ReplySaveRequestDto;
 import com.cos.blog.model.Board;
-import com.cos.blog.model.Reply;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
 import com.cos.blog.repository.ReplyRepository;
-import com.cos.blog.repository.UserRepository;
 
-// 스프링이 컴포턴트 스캔을 통해서 Bean에 등록을 해줌. IoC를 해준다.
+import lombok.RequiredArgsConstructor;
+
+// 스프링이 컴포넌트 스캔을 통해서 Bean에 등록을 해줌. IoC를 해준다.
 @Service
+@RequiredArgsConstructor // 생성자를 만들 때 초기화가 꼭 돼야 하는 것들을 생성자 파라미터에 넣어서 초기화해 줌
 public class BoardService {
 	
-	@Autowired
-	private BoardRepository boardRepository;
+	// final은 초기화가 없으면 오류가 난다 ex) boardRepository = null;
+	private final BoardRepository boardRepository;
+	private final ReplyRepository replyRepository;
 	
-	@Autowired
-	private ReplyRepository replyRepository;
-	
-	@Autowired
-	private UserRepository userRepository;
+	/*
+	public BoardService(BoardRepository bRepo, ReplyRepository rRepo) {
+		this.boardRepository = bRepo;
+		this.replyRepository = rRepo;
+	}
+	*/
 	
 	
 	@Transactional
@@ -69,6 +72,11 @@ public class BoardService {
 	public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto) {
 		replyRepository.mSave(replySaveRequestDto.getUserId(), replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
 		
+	}
+	
+	@Transactional
+	public void 댓글삭제(int replyId) {
+		replyRepository.deleteById(replyId);
 	}
 	
 }
